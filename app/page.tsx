@@ -53,11 +53,12 @@ export default function Home() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <div key={project.slug} className="group bg-surface rounded-xl overflow-hidden hover:-translate-y-2 transition duration-300 border border-slate-700 hover:border-primary">
-              <div className="h-48 bg-slate-800 relative">
-                 {/* Placeholder for project image */}
-                 <div className="absolute inset-0 flex items-center justify-center text-slate-600">
-                    [Project Screenshot]
-                 </div>
+              <div className="h-48 bg-slate-800 relative overflow-hidden">
+                 <img 
+                   src={project.image} 
+                   alt={project.title} 
+                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" 
+                 />
               </div>
               <div className="p-6">
                 <h4 className="text-xl font-bold text-white mb-2">{project.title}</h4>

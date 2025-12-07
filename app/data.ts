@@ -1,3 +1,19 @@
+export interface Project {
+  slug: string;
+  title: string;
+  headline: string;
+  description: string;
+  tags: string[];
+  content: string;
+  image: string;
+  features?: string[];
+  architecture?: string;
+  architectureImage?: string;
+  secondaryImage?: string;
+  secondaryImageCaption?: string;
+  techStack?: { category: string; details: string }[];
+}
+
 export const personalInfo = {
   name: "Sayyor Yusupov",
   role: "MLOps & AI Engineer",
@@ -15,7 +31,7 @@ export const skills = [
   { name: "React & Next.js", level: 80, category: "Frontend" },
 ];
 
-export const projects = [
+export const projects: Project[] = [
   {
     slug: "uznews-digest",
     title: "UzNews Digest",
@@ -23,24 +39,50 @@ export const projects = [
     description: "UzNewsDigest is a fully automated, serverless pipeline built on Google Cloud Platform (GCP) that intelligently scrapes news websites, extracts structured article data using Large Language Models (LLMs), filters the news, summarizes them and posts them on a Telegram Channel.",
     tags: ["GCP Cloud Run", "Cloud Tasks", "Firestore", "OpenAI", "Crawl4AI", "FastAPI", "Python", "Cloud Scheduler"],
     content: "The system utilizes a decoupled, event-driven microservices architecture on GCP. Cloud Scheduler triggers the workflow, while Cloud Tasks manages rate limiting and retries across services. We use `crawl4ai` and OpenAI models for intelligent content extraction from complex HTML, ensuring structured data retrieval. A filtering layer uses LLM embeddings to deduplicate news and verify relevance (e.g., filtering for Uzbekistan-related content). Data is stored in Firestore with a TTL policy for automatic cleanup, and final summaries are posted to Telegram in real-time.",
-    image: "/images/placeholder-news.png" // You will replace this with your actual screenshot
+    image: "/images/newsdigest_screenshot.png",
+    features: [
+      "Automated & Scheduled: Runs automatically every 30 minutes.",
+      "Intelligent Extraction: Uses crawl4ai and OpenAI models to extract structured data.",
+      "News Filtering: Filters news using LLM embeddings and content analysis.",
+      "Serverless & Scalable: Built on GCP Cloud Run, Cloud Tasks, and Firestore.",
+      "Resilient Architecture: Decoupled microservices for fault isolation.",
+      "Real-time Posting: Delivers instant notifications to Telegram."
+    ],
+    architecture: "The pipeline follows a decoupled, event-driven architecture. The process is initiated by Cloud Scheduler, which triggers a cascade of tasks managed by Cloud Tasks. Each step is handled by a dedicated, single-responsibility Cloud Run service.",
+    architectureImage: "/images/newsdigest_architecture_diagram.png",
+    techStack: [
+      { category: "Cloud Platform", details: "Google Cloud Platform (GCP)" },
+      { category: "Compute", details: "Cloud Run" },
+      { category: "Task Management", details: "Cloud Tasks" },
+      { category: "Database", details: "Firestore (with TTL Policy)" },
+      { category: "AI & Scraping", details: "crawl4ai, OpenAI API" },
+      { category: "Language", details: "Python 3.10+, FastAPI" }
+    ]
   },
-  {
-    slug: "valeo-llm",
-    title: "Enterprise Document Extraction",
-    headline: "Hybrid LLM Pipeline at Valeo",
-    description: "Designed and deployed hybrid LLM pipelines for large-scale document extraction, reducing manual processing by 80%.",
-    tags: ["RAG", "GCP Cloud Functions", "LangChain", "Python"],
-    content: "Implemented a 2-stage split-merge strategy to handle token limits. Optimized RAG pipelines through advanced prompt engineering, boosting response relevance by 40%.",
-    image: "/images/placeholder-valeo.png"
-  },
+
   {
     slug: "movie-stats",
-    title: "Actors & Movies Analytics",
-    headline: "Full-Stack Analytics Platform",
-    description: "Engineered a full-stack web application using Django and deployed on GCP Cloud Run.",
-    tags: ["Django", "PostgreSQL", "Cloud Scheduler", "TMDB API"],
-    content: "Automated a serverless data-ingestion pipeline from the TMDB API using Cloud Functions. utilized Cloud SQL for robust data storage.",
-    image: "/images/placeholder-movies.png"
+    title: "MovieStats",
+    headline: "Interactive Actor Career Comparison Platform",
+    description: "MovieStats is a web application that allows users to compare the careers of movie actors side-by-side. It visualizes data such as box office performance, genre distribution, and critical reception, providing insights into an actor's filmography.",
+    tags: ["Django 5", "PostgreSQL", "Plotly.js", "Bootstrap 5", "GCP Cloud Run", "TMDB API"],
+    content: "MovieStats enables users to compare up to 3 actors simultaneously, generating interactive charts for metrics like movies per year, average revenue, and genre distribution. The application features a responsive dark-mode UI built with Bootstrap 5 and Plotly.js for rich data visualization. Behind the scenes, a custom Python pipeline fetches data from TMDB, storing it in a robust PostgreSQL database. The entire stack is containerized and deployed on Google Cloud Run with Cloud SQL.",
+    image: "/images/moviestats_screenshot2.png",
+    secondaryImage: "/images/moviestats_screenshot1.png",
+    secondaryImageCaption: "The search interface allows users to easily find and select up to three actors for a side-by-side career comparison.",
+    features: [
+      "Actor Comparison: Compare up to 3 actors side-by-side with interactive charts.",
+      "Rich Visualizations: Plotly.js charts for genre distribution, revenue, and collaborations.",
+      "Deep Insights: Drill-down details for specific movies, co-actors, and directors.",
+      "Modern UI: Responsive dark-themed interface optimized for all devices.",
+      "Robust Data: Automated ingestion pipeline from TMDB API."
+    ],
+    techStack: [
+      { category: "Backend", details: "Python, Django 5" },
+      { category: "Database", details: "PostgreSQL (Cloud SQL)" },
+      { category: "Frontend", details: "Django Templates, Bootstrap 5, Plotly.js" },
+      { category: "Infrastructure", details: "GCP (Cloud Run, Cloud SQL, Secret Manager)" },
+      { category: "Data Source", details: "TMDB API" }
+    ]
   }
 ];
