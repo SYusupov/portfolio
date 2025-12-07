@@ -19,10 +19,10 @@ export const projects = [
   {
     slug: "uznews-digest",
     title: "UzNews Digest",
-    headline: "End-to-End Serverless AI News Pipeline",
-    description: "Designed and deployed a fully automated, serverless news aggregation pipeline on Google Cloud Platform.",
-    tags: ["GCP Cloud Run", "Cloud Tasks", "VertexAI", "Firestore"],
-    content: "Architected a decoupled microservices system using Cloud Run (asynchronous with FastAPI) and Cloud Tasks for resilient queueing. Implemented universal data extraction using LLMs and VertexAI Embedding API for duplicate detection.",
+    headline: "Automated News Scraping & Summarization Bot",
+    description: "UzNewsDigest is a fully automated, serverless pipeline built on Google Cloud Platform (GCP) that intelligently scrapes news websites, extracts structured article data using Large Language Models (LLMs), filters the news, summarizes them and posts them on a Telegram Channel.",
+    tags: ["GCP Cloud Run", "Cloud Tasks", "Firestore", "OpenAI", "Crawl4AI", "FastAPI", "Python", "Cloud Scheduler"],
+    content: "The system utilizes a decoupled, event-driven microservices architecture on GCP. Cloud Scheduler triggers the workflow, while Cloud Tasks manages rate limiting and retries across services. We use `crawl4ai` and OpenAI models for intelligent content extraction from complex HTML, ensuring structured data retrieval. A filtering layer uses LLM embeddings to deduplicate news and verify relevance (e.g., filtering for Uzbekistan-related content). Data is stored in Firestore with a TTL policy for automatic cleanup, and final summaries are posted to Telegram in real-time.",
     image: "/images/placeholder-news.png" // You will replace this with your actual screenshot
   },
   {
