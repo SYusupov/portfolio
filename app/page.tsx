@@ -80,6 +80,22 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* CV SECTION */}
+      <section className="py-20 px-6 text-center">
+        <h3 className="text-3xl font-bold mb-6">Want to know more?</h3>
+        <p className="text-slate-400 mb-8 max-w-2xl mx-auto">
+          Check out my full resume to see my detailed experience, education, and certifications.
+        </p>
+        <a 
+          href="/CV_Sayyor_Yusupov.pdf" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-flex items-center px-8 py-3 bg-primary hover:bg-accent text-white font-bold rounded-full transition-colors duration-300 shadow-lg shadow-primary/25"
+        >
+          View My CV
+        </a>
+      </section>
     </main>
   );
 }
