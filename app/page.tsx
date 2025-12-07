@@ -1,65 +1,84 @@
-import Image from "next/image";
+import Link from "next/link";
+import { personalInfo, projects, skills } from "./data";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-background text-slate-100">
+      
+      {/* HERO SECTION */}
+      <section className="h-screen flex flex-col items-center justify-center text-center px-4 bg-[url('/grid-pattern.svg')]">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background pointer-events-none" />
+        
+        <h1 className="z-10 text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent animate-pulse">
+          {personalInfo.name}
+        </h1>
+        <h2 className="z-10 mt-4 text-2xl md:text-3xl text-blue-200">
+          {personalInfo.role}
+        </h2>
+        <p className="z-10 mt-4 max-w-2xl text-slate-400">
+          {personalInfo.summary}
+        </p>
+        
+        <div className="z-10 flex gap-6 mt-8">
+            <a href={`https://${personalInfo.github}`} target="_blank" className="text-3xl hover:text-primary transition"><FaGithub/></a>
+            <a href={`https://${personalInfo.linkedin}`} target="_blank" className="text-3xl hover:text-primary transition"><FaLinkedin/></a>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* SKILLS SECTION (Matches image_9b7f65.png) */}
+      <section className="py-20 px-6 max-w-5xl mx-auto">
+        <h3 className="text-3xl font-bold mb-10 text-center">Technical Expertise</h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          {skills.map((skill) => (
+            <div key={skill.name} className="bg-surface p-6 rounded-lg shadow-lg border border-slate-700">
+              <div className="flex justify-between mb-2">
+                <span className="font-semibold">{skill.name}</span>
+                <span className="text-primary">{skill.level}%</span>
+              </div>
+              <div className="w-full bg-slate-700 rounded-full h-2.5">
+                <div 
+                  className="bg-gradient-to-r from-primary to-accent h-2.5 rounded-full" 
+                  style={{ width: `${skill.level}%` }}
+                ></div>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* FEATURED PROJECTS LIST */}
+      <section className="py-20 px-6 max-w-6xl mx-auto">
+        <h3 className="text-3xl font-bold mb-10 text-center">Featured Projects</h3>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project) => (
+            <div key={project.slug} className="group bg-surface rounded-xl overflow-hidden hover:-translate-y-2 transition duration-300 border border-slate-700 hover:border-primary">
+              <div className="h-48 bg-slate-800 relative">
+                 {/* Placeholder for project image */}
+                 <div className="absolute inset-0 flex items-center justify-center text-slate-600">
+                    [Project Screenshot]
+                 </div>
+              </div>
+              <div className="p-6">
+                <h4 className="text-xl font-bold text-white mb-2">{project.title}</h4>
+                <p className="text-sm text-slate-400 mb-4">{project.headline}</p>
+                
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tags.slice(0,3).map(tag => (
+                    <span key={tag} className="text-xs px-2 py-1 bg-slate-800 text-primary rounded border border-slate-700">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <Link href={`/projects/${project.slug}`} className="block w-full text-center py-2 bg-gradient-to-r from-primary to-secondary rounded text-white font-semibold hover:opacity-90 transition">
+                  View Details &rarr;
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
   );
 }
